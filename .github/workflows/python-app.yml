@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: sitespeedio/node:ubuntu-20.04-nodejs-12.14.1
 
     steps:
     - uses: actions/checkout@v3
@@ -26,7 +26,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         echo "test app"
         echo ${{ secrets.AWS_ACCESS_KEY_ID }}
+        sudo apt update
+        npm install -g serverless
+        serverless --version
